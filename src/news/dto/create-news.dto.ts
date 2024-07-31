@@ -1,7 +1,12 @@
 import{ ApiProperty} from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { IsBoolean, isNumber, IsNumber, IsString, IsUrl } from 'class-validator';
 
 export class CreateNewsDto {
+
+    @ApiProperty()
+    @IsNumber()
+    story_id: number
+
     @ApiProperty()
     @IsString()
     title: string;
@@ -11,15 +16,15 @@ export class CreateNewsDto {
     author: string;
 
     @ApiProperty()
-    @IsString()
-    created: string;
+    @IsNumber()
+    created: number;
 
     @ApiProperty()
-    @IsString()
+    @IsUrl()
     link: string;
 
     @ApiProperty()
-    @IsString()
+    @IsBoolean()
     visible: boolean;
 
 
