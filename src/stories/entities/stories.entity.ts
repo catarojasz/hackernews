@@ -2,7 +2,11 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 @Schema()
-export class News extends Document{
+export class Story extends Document{
+
+  @Prop()
+  story_id: number;
+
   @Prop()
   title: string;
 
@@ -10,7 +14,7 @@ export class News extends Document{
   author: string;
 
   @Prop()
-  created: string;
+  created: number;
 
   @Prop()
   link: string;
@@ -19,4 +23,4 @@ export class News extends Document{
   visible: boolean;
 }
 
-export const NewsSchema = SchemaFactory.createForClass(News);
+export const NewsSchema = SchemaFactory.createForClass(Story);

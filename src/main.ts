@@ -16,10 +16,10 @@ async function bootstrap() {
   }));
 
   const config = new DocumentBuilder()
-    .setTitle('News example')
+    .setTitle('Stories example')
     .setDescription('The news API description')
     .setVersion('1.0')
-    .addTag('news')
+    .addTag('stories')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

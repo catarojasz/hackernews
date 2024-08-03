@@ -1,7 +1,7 @@
 import{ ApiProperty} from '@nestjs/swagger';
 import { IsBoolean, isNumber, IsNumber, IsString, IsUrl } from 'class-validator';
 
-export class CreateNewsDto {
+export class CreateStoryDto {
 
     @ApiProperty()
     @IsNumber()
