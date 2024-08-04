@@ -2,8 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Story } from './entities/stories.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateStoryDto } from './dto/create-news.dto';
-import { UpdateStoryDto } from './dto/update-news.dto';
+import { CreateStoryDto } from './dto/create-story.dto';
+import { UpdateStoryDto } from './dto/update-story.dto';
 
 @Injectable()
 export class StoriesService {

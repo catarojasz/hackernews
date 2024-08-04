@@ -23,4 +23,4 @@ export class Story extends Document{
   visible: boolean;
 }
 
-export const NewsSchema = SchemaFactory.createForClass(Story);
+export const StorySchema = SchemaFactory.createForClass(Story);

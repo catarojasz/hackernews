@@ -7,7 +7,7 @@ import { StoriesModule } from './stories/stories.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/mongo-news'),
+    MongooseModule.forRoot(process.env.MONGO_URI),
     StoriesModule
   ],
   controllers: [AppController],
