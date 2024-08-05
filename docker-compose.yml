@@ -26,6 +26,7 @@ services:
     environment: 
       MONGO_INITDB_ROOT_USERNAME: mongo
       MONGO_INITDB_ROOT_PASSWORD: mongo
+    restart: always
 
 networks:
   mongo:

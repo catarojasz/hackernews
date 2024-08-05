@@ -3,16 +3,18 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { StoriesModule } from './stories/stories.module';
-import { AxiosService } from './axios/axios.service';
 import { ExternalApiService } from './external-api/external-api.service';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TasksService } from './tasks/tasks.service';
 
 
 @Module({
   imports: [
     MongooseModule.forRoot(process.env.MONGO_URI),
-    StoriesModule
+    StoriesModule,
+    ScheduleModule.forRoot()
   ],
   controllers: [AppController],
-  providers: [AppService, AxiosService, ExternalApiService],
+  providers: [AppService, ExternalApiService, TasksService],
 })
 export class AppModule {}
