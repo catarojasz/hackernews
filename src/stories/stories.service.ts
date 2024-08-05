@@ -1,18 +1,31 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Story } from './entities/stories.entity';
+import { Story } from './schemas/stories.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateStoryDto } from './dto/create-story.dto';
 import { UpdateStoryDto } from './dto/update-story.dto';
+import { ExternalApiService } from 'src/external-api/external-api.service';
 
 @Injectable()
 export class StoriesService {
     constructor(
         @InjectModel(Story.name) private readonly storyModel: Model<Story>,
-
+        private externalApiService : ExternalApiService,
     ) {}
 
-    findAll() {
+    async fetchAndStoreStories(): Promise<void> {
+        const stories = await this.externalApiService.fetchStories();
+    
+        for (const story of stories) {
+          const exists = await this.storyModel.findOne({ story_id: story.story_id }).exec();
+          
+          if (!exists) {
+            await this.storyModel.create(story);
+          }
+        }
+      }
+
+    findAll(): Promise<Story[]> {
         return this.storyModel.find().exec()
       }
     

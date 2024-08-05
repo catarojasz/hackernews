@@ -1,12 +1,26 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, } from '@nestjs/common';
+import { StoriesService } from './stories.service';
+import { ExternalApiService } from 'src/external-api/external-api.service';
+import { Story } from './schemas/stories.schema';
 
 @Controller('Stories')
 export class StoriesController {
 
+  constructor(
+    private readonly storiesService: StoriesService,
+    private readonly externalApiService: ExternalApiService,
+  ) {}
+
+    @Get('stories')
+    getStories() {
+      return this.externalApiService.fetchStories();
+    }
+
+
     @Get()
-    findAll(@Query() paginationQuery){
+    findAll(@Query() paginationQuery): Promise<Story[]> {
         const { limit, offset } = paginationQuery;
-        return `This action returns all stories. Limit ${limit}, offset: ${offset}`;
+        return this.storiesService.findAll();;
     }
 
     @Get(':id')

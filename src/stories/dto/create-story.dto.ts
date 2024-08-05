@@ -23,9 +23,5 @@ export class CreateStoryDto {
     @IsUrl()
     link: string;
 
-    @ApiProperty()
-    @IsBoolean()
-    visible: boolean;
-
 
 }
