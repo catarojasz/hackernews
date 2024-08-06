@@ -3,16 +3,16 @@ services:
     container_name: backend
     image: backend
     build: 
-      context: .
-      dockerfile: ./Dockerfile
+      context: ./backend
+      dockerfile: Dockerfile
     env_file:
-      - .env
+      - ./backend/.env
     ports:
       - "3000:3000"
     networks:
       - mongo
     volumes:
-      - .:/src/app
+      - ./backend/:/src/app
       - /src/app/node_modules
     
   mongo:
