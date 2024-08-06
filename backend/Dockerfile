@@ -1,6 +1,6 @@
 FROM node:20 as builder
 
-WORKDIR /app/builder
+WORKDIR /app/backend/builder
 COPY . .
 
 RUN npm install
@@ -9,10 +9,10 @@ RUN npm run build
 
 FROM node:20-alpine as deploy
 
-WORKDIR /app
+WORKDIR /app/backend
 
-COPY --from=builder /app/builder/dist ./dist
-COPY --from=builder /app/builder/package.json ./
+COPY --from=builder /app/backend/builder/dist ./dist
+COPY --from=builder /app/backend/builder/package.json ./
 
 RUN npm install --prod
 
