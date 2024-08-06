@@ -14,6 +14,7 @@ import { ExternalApiService } from 'src/external-api/external-api.service';
       schema: StorySchema,
     }]), HttpModule],
   controllers: [StoriesController],
-  providers: [StoriesService, ExternalApiService]
+  providers: [StoriesService, ExternalApiService],
+  exports: [StoriesService],
 })
 export class StoriesModule {}

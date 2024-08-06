@@ -16,12 +16,16 @@ export class ExternalApiService {
           tags: 'story',
         },
       }));
-      return response.data.hits.map(hit => ({
+
+      const filteredHits = response.data.hits.filter(hit => (hit.story_url || hit.url) && (hit.story_title || hit.title));
+
+      return filteredHits.map(hit => ({
         story_id: hit.objectID,
-        title: hit.title,
+        title: hit.story_title || hit.title,
         author: hit.author,
-        link: hit.url,
-        created_at: hit.created_at_i,
+        link: hit.story_url || hit.url,
+        created: hit.created_at_i,
+        show: true,
       }));
     } catch (error) {
       console.error('Error fetching stories:', error);

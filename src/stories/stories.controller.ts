@@ -16,6 +16,11 @@ export class StoriesController {
       return this.externalApiService.fetchStories();
     }
 
+    @Patch(':id/noshow')
+    async markAsNoShow(@Param('id') id: string) {
+      return this.storiesService.update(id, { show: false });
+    }
+
 
     @Get()
     findAll(@Query() paginationQuery): Promise<Story[]> {

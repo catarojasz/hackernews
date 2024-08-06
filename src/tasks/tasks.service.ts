@@ -6,7 +6,7 @@ import { StoriesService } from 'src/stories/stories.service';
 export class TasksService {
   constructor(private storiesService: StoriesService) {}
 
-  @Cron(CronExpression.EVERY_MINUTE)
+  @Cron(CronExpression.EVERY_HOUR)
   handleCron() {
     this.storiesService.fetchAndStoreStories();
   }

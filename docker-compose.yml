@@ -12,8 +12,8 @@ services:
     networks:
       - mongo
     volumes:
-      - .:/scr/app
-      - /scr/app/node_modules
+      - .:/src/app
+      - /src/app/node_modules
     
   mongo:
     image: mongo

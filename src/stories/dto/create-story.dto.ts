@@ -1,5 +1,5 @@
 import{ ApiProperty} from '@nestjs/swagger';
-import { IsBoolean, isNumber, IsNumber, IsString, IsUrl } from 'class-validator';
+import { IsBoolean, IsNumber, IsString, IsUrl } from 'class-validator';
 
 export class CreateStoryDto {
 
@@ -23,5 +23,8 @@ export class CreateStoryDto {
     @IsUrl()
     link: string;
 
-
+    @ApiProperty()
+    @IsBoolean()
+    show: boolean;
+ß
 }
