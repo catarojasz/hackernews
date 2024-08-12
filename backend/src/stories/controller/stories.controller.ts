@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, } from '@nestjs/common';
-import { StoriesService } from './stories.service';
+import { StoriesService } from '../provider/stories.service';
 import { ExternalApiService } from 'src/external-api/external-api.service';
-import { Story } from './schemas/stories.schema';
-import { UpdateStoryDto } from './dto/update-story.dto';
+import { Story } from '../schemas/stories.schema';
+import { UpdateStoryDto } from '../dto/update-story.dto';
 
 @Controller('Stories')
 export class StoriesController {

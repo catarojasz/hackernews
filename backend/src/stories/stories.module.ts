@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { StoriesController } from './stories.controller';
-import { StoriesService } from './stories.service';
+import { StoriesController } from './controller/stories.controller';
+import { StoriesService } from './provider/stories.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Story, StorySchema } from './schemas/stories.schema';
 import { HttpModule } from '@nestjs/axios';
 import { ExternalApiService } from 'src/external-api/external-api.service';
+import { StoriesRepository } from './repository/stories.repository';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { ExternalApiService } from 'src/external-api/external-api.service';
       schema: StorySchema,
     }]), HttpModule],
   controllers: [StoriesController],
-  providers: [StoriesService, ExternalApiService],
+  providers: [StoriesService, ExternalApiService, StoriesRepository],
   exports: [StoriesService],
 })
 export class StoriesModule {}
