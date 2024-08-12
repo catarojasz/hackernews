@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { StoriesController } from './controller/stories.controller';
-import { StoriesService } from './provider/stories.service';
+import { StoriesService } from './service/stories.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Story, StorySchema } from './schemas/stories.schema';
 import { HttpModule } from '@nestjs/axios';
