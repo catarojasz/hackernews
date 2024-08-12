@@ -24,7 +24,7 @@ export class CreateStoryDto {
     link: string;
 
     @ApiProperty()
-    @IsBoolean()
-    show: boolean;
+    @IsNumber()
+    noShow: number;
 ß
 }

@@ -35,7 +35,7 @@ export class ExternalApiService {
           author: hit.author,
           link: hit.story_url || hit.url,
           created: hit.created_at_i,
-          show: true,
+          noShow: true,
         })));
 
         page++; 
