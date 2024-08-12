@@ -9,24 +9,39 @@ export class ExternalApiService {
 
   async fetchStories(): Promise<any[]> {
     const url = 'https://hn.algolia.com/api/v1/search_by_date';
+    let allHits = [];
+    let page = 0;
+    const hitsPerPage = 20; 
+    let nbPages = 0; 
+
     try {
-      const response = await lastValueFrom(this.httpService.get(url, {
-        params: {
-          query: 'nodejs',
-          tags: 'story',
-        },
-      }));
+      do {
+        const response = await lastValueFrom(this.httpService.get(url, {
+          params: {
+            query: 'nodejs',
+            tags: 'story',
+            page: page,
+            hitsPerPage: hitsPerPage,
+          },
+        }));
 
-      const filteredHits = response.data.hits.filter(hit => (hit.story_url || hit.url) && (hit.story_title || hit.title));
+        nbPages = response.data.nbPages;
 
-      return filteredHits.map(hit => ({
-        story_id: hit.objectID,
-        title: hit.story_title || hit.title,
-        author: hit.author,
-        link: hit.story_url || hit.url,
-        created: hit.created_at_i,
-        show: true,
-      }));
+        const hits = response.data.hits.filter(hit => (hit.story_url || hit.url) && (hit.story_title || hit.title));
+        
+        allHits = allHits.concat(hits.map(hit => ({
+          story_id: hit.objectID,
+          title: hit.story_title || hit.title,
+          author: hit.author,
+          link: hit.story_url || hit.url,
+          created: hit.created_at_i,
+          show: true,
+        })));
+
+        page++; 
+      } while (page < nbPages); 
+
+      return allHits;
     } catch (error) {
       console.error('Error fetching stories:', error);
       throw error;

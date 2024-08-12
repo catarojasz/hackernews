@@ -19,15 +19,27 @@ export class StoriesService {
         for (const story of stories) {
           const exists = await this.storyModel.findOne({ story_id: story.story_id }).exec();
           
-          if (!exists) {
-            await this.storyModel.create(story);
-          }
+          if(exists) {
+            const isDifferent = ['title', 'author', 'created', 'url'].some(field => exists[field] !== story[field]);
+          
+            if (isDifferent) {
+                await this.storyModel.updateOne({ story_id: story.story_id }, { $set: {
+                title: story.title,
+                author: story.author,
+                created: story.created,
+                url: story.url
+                }}).exec();
+            }
+
+        } else {
+          await this.storyModel.create(story);
         }
-      }
+        }
+    }
 
     findAll(): Promise<Story[]> {
         return this.storyModel.find().exec()
-      }
+    }
     
     async findOne(id: string) {
         const story = await this.storyModel.findOne({ _id: id}).exec();
@@ -51,8 +63,11 @@ export class StoriesService {
         return existingStory;
     }
 
-    async remove(id: string) {
-        const story = await this.findOne(id);
-        return story.deleteOne();
-    }
+    async remove(id: string): Promise<any> {
+        const result = await this.storyModel.deleteOne({ _id: id }).exec();
+        if (result.deletedCount === 0) {
+          throw new NotFoundException(`News with ID ${id} not found.`);
+        }
+        return result;
+      }
 }
