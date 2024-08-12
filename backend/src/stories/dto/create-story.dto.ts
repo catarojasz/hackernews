@@ -26,5 +26,5 @@ export class CreateStoryDto {
     @ApiProperty()
     @IsNumber()
     noShow: number;
-ß
+
 }

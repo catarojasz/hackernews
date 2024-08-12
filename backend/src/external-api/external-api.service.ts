@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { StoriesService } from 'src/stories/service/stories.service'; 
 
 @Injectable()
 export class ExternalApiService {
@@ -35,7 +35,7 @@ export class ExternalApiService {
           author: hit.author,
           link: hit.story_url || hit.url,
           created: hit.created_at_i,
-          noShow: true,
+          noShow: null,
         })));
 
         page++; 

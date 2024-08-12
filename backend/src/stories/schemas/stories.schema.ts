@@ -19,8 +19,8 @@ export class Story extends Document{
   @Prop()
   link: string;
 
-  @Prop({type: Boolean, default: true})
-  show: Boolean;
+  @Prop({ type: Number, default: null })
+  noShow: number;
 }
 
 export const StorySchema = SchemaFactory.createForClass(Story);
