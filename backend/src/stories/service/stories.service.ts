@@ -1,11 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { CreateStoryDto } from '../dto/create-story.dto';
 import { UpdateStoryDto } from '../dto/update-story.dto';
 import { ExternalApiService } from 'src/external-api/external-api.service';
 import { StoriesRepository } from '../repository/stories.repository';
 
 @Injectable()
-export class StoriesService {
+export class StoriesService implements OnModuleInit {
     constructor(
         private storiesRepository: StoriesRepository,
         private externalApiService: ExternalApiService,
@@ -64,5 +64,9 @@ export class StoriesService {
             throw new NotFoundException(`News with ID ${id} not found.`);
         }
         return result;
+    }
+
+    async onModuleInit(): Promise<any> {
+        await this.externalApiService.fetchStories();
     }
 }
