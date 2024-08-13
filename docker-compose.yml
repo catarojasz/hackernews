@@ -30,16 +30,18 @@ services:
     restart: always
 
 
-  nextjs:
+  frontend:
     container_name: frontend
+    image: frontend
     build:
       context: ./frontend  
       dockerfile: Dockerfile 
     ports:
-      - "8000:3000"
+      - "3001:3000"
     volumes:
       - ./frontend:/app 
-      - /app/node_modules
+      - /frontend/node_modules
+      - /frontend/.next
     networks:
       - mongo 
 
