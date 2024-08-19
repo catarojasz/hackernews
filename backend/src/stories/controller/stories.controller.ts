@@ -25,7 +25,7 @@ export class StoriesController {
 
     @Get()
     findAll(): Promise<Story[]> {
-        return this.storiesService.findAll();;
+        return this.storiesService.findAll();
     }
 
     @Get(':id')
