@@ -7,17 +7,17 @@ interface DateFormatProps {
 }
 
 const DateFormat: React.FC<DateFormatProps> = ({ created, className }) => {
-    
-    const date = created;
+
+    const date = new Date(created * 1000);
     console.log(date)
     let dateText;
     if (isValid(date)) {
         if (isToday(date)) {
-            dateText = format(date,'HH:mm');
-    
+            dateText = format(date, 'HH:mm');
+
         } else if (isYesterday(date)) {
             dateText = 'Yesterday';
-    
+
         } else {
             dateText = format(date, 'd MMMM yyyy');
         }
@@ -27,7 +27,7 @@ const DateFormat: React.FC<DateFormatProps> = ({ created, className }) => {
     }
 
     return (
-        <span style={{color: '333333'}}>{ dateText }</span>
+        <span style={{ color: '333333' }}>{dateText}</span>
     )
 };
 

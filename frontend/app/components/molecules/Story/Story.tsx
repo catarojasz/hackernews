@@ -54,7 +54,7 @@ const Story: React.FC<StoryProps> = ({ story_id, title, author, link, created, o
 
             <Text className={styles['story-title']} name={title}/>
             <Text className={styles['story-author']} name={author}></Text>
-            <DateFormat className={styles['story-date']} epoch={created}></DateFormat>
+            <DateFormat className={styles['story-date']} created={created}></DateFormat>
             {isHovered && <TrashButton onClick={handleNoShowClick} className={styles['story-button']} />}
         </div>
     )
